@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SpLabApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(SpLabApplication.class, args);
 	}
 
