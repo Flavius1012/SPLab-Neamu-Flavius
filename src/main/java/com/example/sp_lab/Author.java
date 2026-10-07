@@ -10,6 +10,6 @@ public class Author{
     }
 
     public String print(){
-        return name + surname;
+        return "Author: " + name + surname;
     }
 }
