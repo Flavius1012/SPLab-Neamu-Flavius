@@ -8,9 +8,15 @@ public class Paragraph implements Element {
 
     public Paragraph(String text) {
         this.text = text;
+        textAlignment = null;
     }
 
-    public void print() { System.out.println("Paragraph: " + text); }
+    public void print() {
+        if(textAlignment == null)
+            System.out.println("Paragraph: " + text);
+        else
+            textAlignment.render(this, new Context(50));
+    }
 
     public void add(Element e) { throw new UnsupportedOperationException("Paragraph is a leaf"); }
     public void remove(Element e) { throw new UnsupportedOperationException("Paragraph is a leaf"); }
@@ -19,4 +25,6 @@ public class Paragraph implements Element {
     public void setAlignStrategy(AlignStrategy alignment){
         this.textAlignment = alignment;
     }
+
+    public String getText(){ return text;}
 }

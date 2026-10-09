@@ -18,7 +18,7 @@ public class Section implements Element{
 
     @Override
     public void print() {
-        System.out.println("Sectiunea " + title + ':');
+        System.out.println(title + ':');
         elements.forEach(Element::print);
     }
 
