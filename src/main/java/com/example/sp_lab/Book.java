@@ -6,10 +6,12 @@ import java.util.List;
 
 public class Book{
 
+    private final String title;
     private final List<Element> elements;
     private final List<Author> authors;
 
-    public Book(){
+    public Book(String title){
+        this.title = title;
         elements = new ArrayList<>();
         authors = new ArrayList<>();
     }
@@ -19,7 +21,7 @@ public class Book{
             e.print();
     }
 
-    public void add(Element e) {
+    public void addContent(Element e) {
         elements.add(e);
     }
 

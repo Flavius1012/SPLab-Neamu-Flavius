@@ -1,27 +1,42 @@
 package com.example.sp_lab;
 
-import org.springframework.boot.SpringApplication;
-
 public class Main {
     public static void main(String[] args) {
+
+        Book book1 = new Book("Carte 1");
+        Author author1 = new Author("John", "Jones");
+        book1.addAuthor(author1);
+
         Section cap1 = new Section("Capitolul 1");
-        Paragraph p1 = new Paragraph("Paragraph 1");
-        cap1.add(p1);
-        Paragraph p2 = new Paragraph("Paragraph 2");
-        cap1.add(p2);
-        Paragraph p3 = new Paragraph("Paragraph 3");
-        cap1.add(p3);
-        Paragraph p4 = new Paragraph("Paragraph 4");
-        cap1.add(p4);
-        System.out.println("Printing without Alignment");
-        System.out.println();
-        cap1.print();
-//        p1.setAlignStrategy(new AlignCenter());
+        Section cap11 = new Section("Capitolul 1.1");
+        Section cap111 = new Section("Capitolul 1.1.1");
+        Section cap1111 = new Section("Capitolul 1.1.1.1");
+
+        book1.addContent(new Paragraph("BEFORE"));
+        book1.addContent(cap1);
+        cap1.add(new Paragraph("Inceput capitol 1"));
+        Paragraph p1 = new Paragraph("Text cu aliniere la stanga");
+        p1.setAlignStrategy(new AlignLeft());
+        Paragraph p2 = new Paragraph("Text cu aliniere la dreapta");
         p2.setAlignStrategy(new AlignRight());
-        p3.setAlignStrategy(new AlignLeft());
-        System.out.println();
-        System.out.println("Printing with Alignment");
-        System.out.println();
-        cap1.print();
+        cap1.add(p1);
+        cap1.add(p2);
+        cap1.add(cap11);
+
+        cap11.add(new Paragraph("Inceput subcapitol 1.1"));
+        cap11.add(cap111);
+
+        cap111.add(new Paragraph("Inceput subcapitol 1.1.1"));
+        cap111.add(cap1111);
+
+        cap1111.add(new Paragraph("Inceput subcapitol 1.1.1.1"));
+        cap1111.add(new Image("url", "Imagine subcapitol 1.1.1.1"));
+
+        book1.print();
+
+
+
+
+
     }
 }
