@@ -29,6 +29,10 @@ public class Book{
         elements.remove(e);
     }
 
+    public List<Element> getElements() {
+        return elements;
+    }
+
     public Element get(int index) {
         return elements.get(index);
     }

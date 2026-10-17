@@ -1,5 +1,7 @@
 package com.example.sp_lab;
 
+import com.example.sp_lab.visitor_pattern.Visitor;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,5 +37,20 @@ public class Section implements Element{
     @Override
     public Element get(int index) {
         return elements.get(index);
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+
+        elements.forEach(e -> e.accept(visitor));
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public List<Element> getElements() {
+        return elements;
     }
 }

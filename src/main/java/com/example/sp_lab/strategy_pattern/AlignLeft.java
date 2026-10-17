@@ -1,4 +1,7 @@
-package com.example.sp_lab;
+package com.example.sp_lab.strategy_pattern;
+
+import com.example.sp_lab.Context;
+import com.example.sp_lab.Paragraph;
 
 public class AlignLeft implements AlignStrategy{
 
