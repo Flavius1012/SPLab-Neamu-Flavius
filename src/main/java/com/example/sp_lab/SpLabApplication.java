@@ -1,5 +1,6 @@
 package com.example.sp_lab;
 
+import com.example.sp_lab.component.ClientComponent;
 import com.example.sp_lab.component.SingletonComponent;
 import com.example.sp_lab.component.TransientComponent;
 import org.springframework.boot.SpringApplication;
@@ -15,6 +16,9 @@ public class SpLabApplication {
 
 		TransientComponent tc = context.getBean(TransientComponent.class);
 		SingletonComponent sc = context.getBean(SingletonComponent.class);
+
+		ClientComponent c = context.getBean(ClientComponent.class);
+		c.operation();
 
 		tc.operation();
 		sc.operation();
