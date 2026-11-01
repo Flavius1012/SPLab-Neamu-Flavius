@@ -2,11 +2,19 @@ package com.example.sp_lab;
 
 import com.example.sp_lab.strategy_pattern.AlignStrategy;
 import com.example.sp_lab.visitor_pattern.Visitor;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Transient;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-public class Paragraph implements Element {
+@NoArgsConstructor
+@Getter
+@Entity
+public class Paragraph extends BaseElement {
 
     private String text;
 
+    @Transient
     private AlignStrategy textAlignment;
 
     public Paragraph(String text) {
