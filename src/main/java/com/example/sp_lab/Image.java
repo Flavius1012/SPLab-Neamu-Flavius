@@ -1,8 +1,14 @@
 package com.example.sp_lab;
 
 import com.example.sp_lab.visitor_pattern.Visitor;
+import jakarta.persistence.Entity;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-public class Image implements Element {
+@NoArgsConstructor
+@Getter
+@Entity
+public class Image extends BaseElement{
 
     private String url;
 
