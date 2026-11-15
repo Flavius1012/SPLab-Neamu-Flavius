@@ -2,6 +2,7 @@ package com.example.sp_lab.controller;
 
 import com.example.sp_lab.Book;
 import com.example.sp_lab.command.*;
+import com.example.sp_lab.observer_pattern.AllBooksSubject;
 import com.example.sp_lab.persistence.CrudRepository;
 import com.example.sp_lab.repository.BookRepository;
 import com.example.sp_lab.service.BookService;
@@ -14,9 +15,11 @@ import java.util.List;
 public class BooksController {
 
     private final CommandContext context;
+    private final AllBooksSubject allBooksSubject;
 
-    public BooksController(CrudRepository<Book, Long> bookRepository){
+    public BooksController(CrudRepository<Book, Long> bookRepository, AllBooksSubject allBooksSubject){
         this.context = new CommandContext(bookRepository);
+        this.allBooksSubject = allBooksSubject;
     }
 
     @GetMapping("/books")
@@ -35,7 +38,9 @@ public class BooksController {
     @PostMapping("/books")
     public Book createBook(@RequestBody Book book){
 
-        return new CreateBookCommand(book, context).execute();
+       Book saved = new CreateBookCommand(book, context).execute();
+       allBooksSubject.add(saved);
+       return saved;
     }
 
     @PutMapping("/books/{id}")
