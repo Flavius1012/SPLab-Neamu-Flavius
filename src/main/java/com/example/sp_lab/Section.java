@@ -1,20 +1,26 @@
 package com.example.sp_lab;
 
 import com.example.sp_lab.visitor_pattern.Visitor;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
-
-public class Section implements Element{
+@NoArgsConstructor
+@Getter
+@Entity
+public class Section extends BaseElement{
 
     private String title;
 
-    private final List<Element> elements;
+    @OneToMany(targetEntity = BaseElement.class, cascade = CascadeType.ALL)
+    private List<Element> elements = new ArrayList<>();
 
     public Section(String title){
         this.title = title;
-
-        elements = new ArrayList<>();
     }
 
 
@@ -44,13 +50,5 @@ public class Section implements Element{
         visitor.visit(this);
 
         elements.forEach(e -> e.accept(visitor));
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public List<Element> getElements() {
-        return elements;
     }
 }
