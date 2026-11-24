@@ -7,7 +7,7 @@ public class AlignRight implements AlignStrategy{
     @Override
     public void render(Paragraph paragraph, Context context) {
         int width = context.getWidth();
-        int spaces = width - paragraph.getText().length();
+        int spaces = Math.max(0, width - paragraph.getText().length());
         System.out.println(" ".repeat(spaces) + paragraph.getText());
     }
 }

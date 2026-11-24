@@ -3,9 +3,14 @@ package com.example.sp_lab.visitor_pattern;
 import com.example.sp_lab.*;
 
 public class RenderContentVisitor implements Visitor{
+
     @Override
     public void visit(Book book) {
-        throw new UnsupportedOperationException();
+        System.out.println("Book: " + book.getTitle());
+        System.out.println();
+        System.out.println("Authors:");
+        book.getAuthors().forEach(a -> System.out.println(a.print()));
+        System.out.println();
     }
 
     @Override
@@ -16,6 +21,7 @@ public class RenderContentVisitor implements Visitor{
 
     @Override
     public void visit(TableOfContents tableOfContents) {
+        System.out.println("TABLE OF CONTENTS:");
 
     }
 
@@ -36,4 +42,12 @@ public class RenderContentVisitor implements Visitor{
     public void visit(Table table) {
         System.out.println("Table with title:" + table.getTitle());
     }
+
+
+    @Override
+    public void visit(ImageProxy imageProxy) {
+        Image image = imageProxy.loadImage();
+        System.out.println("Image with name:" + image.getName());
+    }
+
 }

@@ -46,6 +46,7 @@ public class Main {
 
         Section cap1 = new Section("Capitolul 1");
         Paragraph p1 = new Paragraph("Paragraph 1");
+        p1.setAlignStrategy(new AlignRight());
         cap1.add(p1);
         Paragraph p2 = new Paragraph("Paragraph 2");
         cap1.add(p2);
@@ -81,9 +82,20 @@ public class Main {
 //        System.out.println();
 //        System.out.println();
 
-        GenerateToC ToC = new GenerateToC();
-        ToC.visit(book1);
-        ToC.printToC();
+//        GenerateToC ToC = new GenerateToC();
+//        ToC.visit(book1);
+//        ToC.printToC();
 
+//        p1.print();
+
+        book1.accept(new RenderContentVisitor());
+
+        BookStatistics stats = new BookStatistics();
+        book1.accept(stats);
+        stats.printStatistics();
+
+        GenerateToC toc = new GenerateToC();
+        book1.accept(toc);
+        toc.printToC();
     }
 }
