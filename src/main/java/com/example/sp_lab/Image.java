@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.concurrent.TimeUnit;
+
 @NoArgsConstructor
 @Getter
 @Entity
@@ -17,9 +19,14 @@ public class Image extends BaseElement{
     public Image(String url, String name) {
         this.url = url;
         this.name = name;
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
     }
 
-    public void print() { System.out.println("Image with name:" + name); }
+//    public void print() { System.out.println("Image with name:" + name); }
 
     public void add(Element e) { throw new UnsupportedOperationException("Image is a leaf"); }
     public void remove(Element e) { throw new UnsupportedOperationException("Image is a leaf"); }

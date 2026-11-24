@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Entity
 public class TableOfContents extends BaseElement {
 
-    public void print() { System.out.println("Table of contents"); }
+//    public void print() { System.out.println("Table of contents"); }
 
     public void add(Element e) { throw new UnsupportedOperationException("TableOfContents is a leaf"); }
     public void remove(Element e) { throw new UnsupportedOperationException("TableOfContents is a leaf"); }

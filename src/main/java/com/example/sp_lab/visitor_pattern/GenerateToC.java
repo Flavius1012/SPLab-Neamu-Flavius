@@ -21,11 +21,6 @@ public class GenerateToC implements Visitor{
     public void visit(Book book) {
         pageCounter = 0;
         linie.clear();
-
-        List<Element> elements = book.getElements();
-
-        elements.forEach(e -> e.accept(this));
-
     }
 
     @Override
@@ -35,7 +30,7 @@ public class GenerateToC implements Visitor{
 
     @Override
     public void visit(TableOfContents tableOfContents) {
-        throw new UnsupportedOperationException();
+
     }
 
     @Override
@@ -50,6 +45,11 @@ public class GenerateToC implements Visitor{
 
     @Override
     public void visit(Table table) {
+        pageCounter++;
+    }
+
+    @Override
+    public void visit(ImageProxy imageProxy) {
         pageCounter++;
     }
 

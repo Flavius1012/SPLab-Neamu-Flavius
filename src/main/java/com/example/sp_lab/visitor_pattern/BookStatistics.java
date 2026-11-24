@@ -15,7 +15,6 @@ public class BookStatistics implements Visitor {
 
     @Override
     public void visit(Book book) {
-        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -41,6 +40,11 @@ public class BookStatistics implements Visitor {
     @Override
     public void visit(Table table) {
         tables++;
+    }
+
+    @Override
+    public void visit(ImageProxy imageProxy) {
+        images++;
     }
 
     public void printStatistics(){

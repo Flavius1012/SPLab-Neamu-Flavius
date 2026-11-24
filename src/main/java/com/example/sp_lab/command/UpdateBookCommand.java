@@ -12,13 +12,14 @@ public class UpdateBookCommand implements Command<Book>{
 
     private final CommandContext context;
 
-
     @Override
     public Book execute() {
-        var repo = context.getBookRepository();
-        if(!repo.existsById(id))
-            return null;
-        book.setId(id);
-        return repo.save(book);
+        return context.getBookRepository().findById(id)
+                .map(existing -> {
+                    existing.setTitle(book.getTitle());
+                    existing.setAuthors(book.getAuthors());
+                    return context.getBookRepository().save(existing);
+                })
+                .orElse(null);
     }
 }

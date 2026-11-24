@@ -13,10 +13,6 @@ public class BaseElement implements Element{
     @Getter
     private Long id;
 
-    @Override
-    public void print() {
-
-    }
 
     @Override
     public void add(Element e) {

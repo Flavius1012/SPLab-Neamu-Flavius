@@ -22,12 +22,12 @@ public class Paragraph extends BaseElement {
         textAlignment = null;
     }
 
-    public void print() {
-        if(textAlignment == null)
-            System.out.println("Paragraph: " + text);
-        else
-            textAlignment.render(this, new Context(50));
-    }
+//    public void print() {
+//        if(textAlignment == null)
+//            System.out.println("Paragraph: " + text);
+//        else
+//            textAlignment.render(this, new Context(50));
+//    }
 
     public void add(Element e) { throw new UnsupportedOperationException("Paragraph is a leaf"); }
     public void remove(Element e) { throw new UnsupportedOperationException("Paragraph is a leaf"); }

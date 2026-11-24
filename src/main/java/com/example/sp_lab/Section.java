@@ -24,11 +24,7 @@ public class Section extends BaseElement{
     }
 
 
-    @Override
-    public void print() {
-        System.out.println(title + ':');
-        elements.forEach(Element::print);
-    }
+
 
     @Override
     public void add(Element e) {

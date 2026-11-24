@@ -1,5 +1,6 @@
 package com.example.sp_lab;
 
+import com.example.sp_lab.visitor_pattern.Visitor;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -22,23 +23,25 @@ public class Book{
     @Id
     private Long id;
 
+    @Setter
     private String title;
 
     @OneToMany(targetEntity = BaseElement.class, cascade = CascadeType.ALL)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-
     private List<Element> elements = new ArrayList<>();
 
-    @ManyToMany
+    @Setter
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Author> authors = new ArrayList<>();
+
     public Book(String title){
         this.title = title;
     }
 
-    public void print() {
-        for(Element e : elements)
-            e.print();
-    }
+//    public void print() {
+//        for(Element e : elements)
+//            e.print();
+//    }
 
     public void addContent(Element e) {
         elements.add(e);
@@ -54,5 +57,10 @@ public class Book{
 
     public void addAuthor(Author a){
         authors.add(a);
+    }
+
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+        elements.forEach(e -> e.accept(visitor));
     }
 }

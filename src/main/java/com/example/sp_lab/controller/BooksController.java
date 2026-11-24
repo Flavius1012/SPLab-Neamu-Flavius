@@ -6,6 +6,7 @@ import com.example.sp_lab.observer_pattern.AllBooksSubject;
 import com.example.sp_lab.persistence.CrudRepository;
 import com.example.sp_lab.repository.BookRepository;
 import com.example.sp_lab.service.BookService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
@@ -16,21 +17,27 @@ public class BooksController {
 
     private final CommandContext context;
     private final AllBooksSubject allBooksSubject;
+    private final CommandExecutor syncExecutor;
+    private final CommandExecutor asyncExecutor;
 
-    public BooksController(CrudRepository<Book, Long> bookRepository, AllBooksSubject allBooksSubject){
+    public BooksController(CrudRepository<Book, Long> bookRepository, AllBooksSubject allBooksSubject,
+                            @Qualifier("syncExecutor") CommandExecutor syncExecutor,
+                            @Qualifier("asyncExecutor") CommandExecutor asyncExecutor){
         this.context = new CommandContext(bookRepository);
         this.allBooksSubject = allBooksSubject;
+        this.syncExecutor = syncExecutor;
+        this.asyncExecutor = asyncExecutor;
     }
 
     @GetMapping("/books")
     public List<Book> returnBooks(){
-        return new GetAllBooksCommand(context).execute();
+        return syncExecutor.execute(new GetAllBooksCommand(context)).join();
     }
 
     @GetMapping("/books/{id}")
-    public ResponseEntity<Book> returnDetailsBook(@PathVariable Long id){
-        Book book = new GetBookByIdCommand(id, context).execute();
-        if(book == null)
+    public ResponseEntity<Book> returnDetailsBook(@PathVariable Long id) {
+        Book book = syncExecutor.execute(new GetBookByIdCommand(id, context)).join();
+        if (book == null)
             return ResponseEntity.notFound().build();
         return ResponseEntity.ok(book);
     }
